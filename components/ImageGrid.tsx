@@ -1,6 +1,10 @@
 
 import { Grid, Box, ImageList, ImageListItem } from "@mui/material";
-export default function ImageGrid({ images }) {
+import { Image } from "modules/gallery/domain/Image.entity";
+interface ImageGridProps {
+  images: Array<Image>;
+}
+export default function ImageGrid({ images }: ImageGridProps) {
   return <Grid container spacing={2} >
     <Grid item xs={12}>
       <Box>{images.length} images</Box>
@@ -14,9 +18,8 @@ export default function ImageGrid({ images }) {
 }
 
 const Images = (props) => {
-  console.log(props)
   return props.images.map((image) => <ImageListItem>
-    <img src={image.src}></img>
+    <img key={image.id} src={image.src}></img>
   </ImageListItem >)
 }
 

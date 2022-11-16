@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from "@mui/material/Container";
-import { Gallery } from "@/components/layout"
 
 const darkTheme = createTheme({
   palette: {
@@ -13,7 +12,7 @@ const darkTheme = createTheme({
 export default function MyApp({ Component, pageProps }: AppProps) {
   return <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" >
       <Component {...pageProps} />
     </Container>
   </ThemeProvider>
