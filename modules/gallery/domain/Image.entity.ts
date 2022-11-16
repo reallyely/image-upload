@@ -43,12 +43,12 @@ export class ImageOption {
 
 export class ImageDisplay {
   id?: string;
-  content: string;
+  src: string;
   label: string;
   private constructor(props: Image) {
     this.id = new Date().toLocaleString()
     this.label = props.name
-    this.content = props.content
+    this.src = props.content
   }
   public static create(props: Image) {
     return new ImageDisplay(props)

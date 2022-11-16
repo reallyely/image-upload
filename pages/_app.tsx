@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from "@mui/material/Container";
+import '@fontsource/roboto/300.css';
 
 const darkTheme = createTheme({
   palette: {

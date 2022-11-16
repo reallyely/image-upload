@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Gallery, Top } from '@/components/layout';
 import ImageGrid from '@/components/ImageGrid';
 import ImageUpload from '@/components/ImageUpload';
 import ImageSearch from '@/components/ImageSearch';
+import { Image, ImageDisplay } from "modules/gallery/domain/Image.entity";
 
-export default function Home() {
+interface HomeData {
+  images: Array<ImageDisplay>
+}
+
+export default function Home(props: PropsWithChildren<HomeData>) {
   return (
     <Gallery
       TopContent={
@@ -15,6 +20,20 @@ export default function Home() {
         </Top>
 
       }
-      MainContent={<ImageGrid images={[{ src: "https://avatars.githubusercontent.com/u/1640588?v=4" }, { src: "https://avatars.githubusercontent.com/u/1640588?v=4" }]} ></ImageGrid >}
+      MainContent={<ImageGrid images={props.images} ></ImageGrid >}
     />)
 }
+
+
+Home.getInitialProps = async () => {
+  const anImage = ImageDisplay.create(Image.create({
+    name: "Cool image",
+    id: "new id",
+    content: "https://avatars.githubusercontent.com/u/1640588?v=4"
+  }))
+  const elevenImages = new Array(11).fill(anImage)
+
+  return { images: elevenImages }
+}
+
+
