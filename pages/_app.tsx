@@ -12,7 +12,7 @@ const darkTheme = createTheme({
 export default function MyApp({ Component, pageProps }: AppProps) {
   return <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <Container maxWidth="lg" >
+    <Container maxWidth="lg" sx={{ marginTop: "1em" }}>
       <Component {...pageProps} />
     </Container>
   </ThemeProvider>

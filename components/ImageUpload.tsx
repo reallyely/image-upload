@@ -1,9 +1,15 @@
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
+import UploadIcon from '@mui/icons-material/Upload';
 import { MouseEventHandler, PropsWithChildren } from "react";
 interface ImageUploadProps {
   handleClick?: MouseEventHandler
 }
 
 export default function ImageUpload(props: PropsWithChildren<ImageUploadProps>) {
-  return <Button onClick={props.handleClick} >Upload Image</Button>
+  return <Button startIcon={<UploadIcon />} component="label">
+
+    Upload Image
+
+    <input hidden accept="image/*" multiple type="file" />
+  </Button>
 }
