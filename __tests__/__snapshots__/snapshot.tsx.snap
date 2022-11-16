@@ -3,103 +3,77 @@
 exports[`renders homepage unchanged 1`] = `
 <div>
   <div
-    class="container"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
   >
-    <main>
-      <h1
-        class="title"
-      >
-        Welcome to 
-        <a
-          href="https://nextjs.org"
-        >
-          Next.js!
-        </a>
-      </h1>
-      <p
-        class="description"
-      >
-        Get started by editing 
-        <code>
-          pages/index.js
-        </code>
-      </p>
-      <div
-        class="grid"
-      >
-        <a
-          class="card"
-          href="https://nextjs.org/docs"
-        >
-          <h3>
-            Documentation →
-          </h3>
-          <p>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://nextjs.org/learn"
-        >
-          <h3>
-            Learn →
-          </h3>
-          <p>
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://github.com/vercel/next.js/tree/canary/examples"
-        >
-          <h3>
-            Examples →
-          </h3>
-          <p>
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://vercel.com/new"
-        >
-          <h3>
-            Deploy →
-          </h3>
-          <p>
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-    <footer
-      class="footer"
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
     >
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        rel="noopener noreferrer"
-        target="_blank"
+      <div
+        class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
       >
-        Powered by
-         
-        <span
-          class="logo"
+        From head container component
+        <div>
+           hello from _app
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
         >
-          <img
-            alt="Vercel Logo"
-            data-nimg="1"
-            decoding="async"
-            height="16"
-            loading="lazy"
-            src="/vercel.svg"
-            srcset="/vercel.svg 1x, /vercel.svg 2x"
-            style="color: transparent;"
-            width="72"
-          />
-        </span>
-      </a>
-    </footer>
+          <div
+            class="MuiBox-root css-0"
+          >
+            2
+             images
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+        >
+          <ul
+            class="MuiImageList-root MuiImageList-quilted css-rvv586-MuiImageList-root"
+            style="grid-template-columns: repeat(2, 1fr); gap: 4px;"
+          >
+            <li
+              class="MuiImageListItem-root MuiImageListItem-quilted css-l086p4-MuiImageListItem-root"
+              style="height: auto; grid-column-end: span 1; grid-row-end: span 1;"
+            >
+              <img
+                class="MuiImageListItem-img"
+                src="https://avatars.githubusercontent.com/u/1640588?v=4"
+              />
+            </li>
+            <li
+              class="MuiImageListItem-root MuiImageListItem-quilted css-l086p4-MuiImageListItem-root"
+              style="height: auto; grid-column-end: span 1; grid-row-end: span 1;"
+            >
+              <img
+                class="MuiImageListItem-img"
+                src="https://avatars.githubusercontent.com/u/1640588?v=4"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-item css-1f064cs-MuiGrid-root"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+      >
+        From FOOTER container component
+        <div>
+           hello from _app
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;
