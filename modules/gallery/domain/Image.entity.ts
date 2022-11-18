@@ -1,6 +1,6 @@
 interface IImage {
-  name: string
-  content: string
+  name?: string
+  content?: string
   id?: string
 }
 
@@ -8,18 +8,21 @@ export class Image implements IImage {
   name: string
   content: string
   id: string
-  private constructor(props: IImage) {
-    this.name = props.name
-    this.content = props.content
-    this.id = new Date().toLocaleString()
+  private constructor({ name = "", content = "", id = new Date().toISOString() }: IImage) {
+    this.name = name
+    this.content = content
+    this.id = id
   }
+
   public static create(props: IImage) {
     return new Image(props)
   }
 
   public toPersistence() {
   }
-
+  public toDisplay() {
+    return ImageDisplay.create(this)
+  }
   public toView() {
     return ImageOption.create(this)
   }
@@ -31,7 +34,7 @@ export class ImageOption {
   label: string;
   value: string;
   private constructor(props: Image) {
-    this.id = new Date().toLocaleString()
+    this.id = props.id
     this.label = props.name
     this.value = props.name
   }
@@ -46,7 +49,7 @@ export class ImageDisplay {
   src: string;
   label: string;
   private constructor(props: Image) {
-    this.id = new Date().toLocaleString()
+    this.id = props.id
     this.label = props.name
     this.src = props.content
   }

@@ -41,8 +41,8 @@ interface ImagesProps {
 }
 const Images = (props: PropsWithChildren<ImagesProps>) => {
   return <>
-    {props.images.map((image) => <ImageListItem>
-      <img key={image.id} src={image.src}></img>
+    {props.images.map((image) => <ImageListItem key={image.id}>
+      <img src={image.src}></img>
     </ImageListItem >)}
   </>
 

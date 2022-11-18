@@ -1,37 +1,37 @@
-import React, { PropsWithChildren } from 'react'
+import React, { MouseEventHandler, PropsWithChildren, useState } from 'react'
 import { Gallery, Top } from '@/components/layout';
 import ImageGrid from '@/components/ImageGrid';
 import ImageUpload from '@/components/ImageUpload';
 import ImageSearch from '@/components/ImageSearch';
 import { Image, ImageDisplay } from "modules/gallery/domain/Image.entity";
-
+import { randomUUID } from "crypto"
 interface HomeData {
-  images: Array<ImageDisplay>
+  images?: Array<ImageDisplay>
 }
-
+type UploadHandler = MouseEventHandler<Element>
 export default function Home(props: PropsWithChildren<HomeData>) {
-  return (
-    <Gallery
-      TopContent={
-        <Top
-          left={<ImageSearch />}
-          right={<ImageUpload />}
-        >
-        </Top>
 
-      }
-      MainContent={<ImageGrid images={props.images} ></ImageGrid >}
-    />)
+  return <Gallery
+    TopContent={
+      <Top
+        left={<ImageSearch />}
+        right={<ImageUpload handleUpload={() => { }} />}
+      >
+      </Top>
+
+    }
+    MainContent={<ImageGrid images={props.images} ></ImageGrid >}
+  />
 }
 
 
 Home.getInitialProps = async () => {
-  const anImage = ImageDisplay.create(Image.create({
+  const anImage = () => Image.create({
+    id: randomUUID(),
     name: "Cool image",
-    id: "new id",
     content: "https://avatars.githubusercontent.com/u/1640588?v=4"
-  }))
-  const elevenImages = new Array(11).fill(anImage)
+  }).toDisplay()
+  const elevenImages = new Array(11).fill({}).map(anImage)
 
   return { images: elevenImages }
 }

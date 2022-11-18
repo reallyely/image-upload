@@ -14,7 +14,7 @@ describe('ImageGrid', () => {
 
   it("Renders when no images provided", () => {
     render(<ImageGrid />)
-    expect(screen.getByText("There's nothing here!")).toBeVisible()
+    expect(screen.getByText("There's nothing here")).toBeVisible()
   })
   it("Renders a provided image", () => {
     render(<ImageGrid images={[anImage]} />)
