@@ -8,6 +8,6 @@ interface ImageUploadProps {
 export default function ImageUpload(props: PropsWithChildren<ImageUploadProps>) {
   return <Button startIcon={<UploadIcon />} component="label">
     Upload Image
-    <input hidden accept="image/*" multiple type="file" onChange={props.handleUpload} />
+    <input hidden accept="image/*" type="file" onChange={props.handleUpload} />
   </Button>
 }

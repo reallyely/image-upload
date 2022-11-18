@@ -15,7 +15,7 @@ exports[`renders homepage unchanged 1`] = `
           class="MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-grid-xs-8 css-1dxyl14-MuiGrid-root"
         >
           <div
-            class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-gcwvw8-MuiAutocomplete-root"
+            class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-rnuy54-MuiAutocomplete-root"
           >
             <div
               class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"

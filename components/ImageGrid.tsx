@@ -1,6 +1,6 @@
 
 import { Grid, Box, Container, ImageList, ImageListItem, Typography } from "@mui/material";
-import { ImageDisplay, Image } from "modules/gallery/domain/Image.entity";
+import { ImageDisplay, Image } from "../modules/gallery/domain/Image.entity";
 import { PropsWithChildren } from "react";
 interface ImageGridProps {
   images?: Array<Image>;
@@ -40,7 +40,7 @@ function FilledImageGrid({ imagesForDisplay }: PropsWithChildren<ImageDisplayGri
 function EmptyImageGrid() {
   return <Container maxWidth="lg">
     <Typography>
-      <h3 align="center">There's nothing here</h3>
+      <p align="center">There's nothing here</p>
     </Typography>
   </Container>
 }

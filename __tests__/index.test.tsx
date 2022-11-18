@@ -3,6 +3,6 @@ import Home from '@/pages/index'
 
 describe('Home', () => {
   it('Doesnt explode', () => {
-    render(<Home />)
+    render(<Home images={[]} />)
   })
 })
