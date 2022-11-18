@@ -1,7 +1,15 @@
 import { NextApiRequest, NextApiResponse, NextApiHandler } from 'next'
-import formidable, { Fields, Files } from "formidable";
+import formidable, { Fields, Files, File } from "formidable";
 import fs from "fs";
+import path from "path";
+import process from "process"
+import { randomUUID } from "crypto"
+import { Image } from "../../modules/gallery/domain/Image.entity"
+import PersistentFile from 'formidable/PersistentFile';
 
+const IMAGE_PATH_LOCAL = "/public/images"
+const IMAGE_PATH_WEB = "/images"
+const IMAGE_REPO = path.join(process.cwd(), IMAGE_PATH_LOCAL)
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
@@ -23,7 +31,9 @@ const uploadImage: NextApiHandler = (req, res) => {
 }
 
 const listImages: NextApiHandler = (req, res) => {
-  return res.status(200).json({ name: 'John Doe' })
+  const imagesFromRepo = fs.readdirSync(IMAGE_REPO);
+  const imagesForApp = imagesFromRepo.map(image => Image.create({ id: randomUUID(), name: image, content: image }))
+  return res.status(200).send(imagesForApp)
 }
 
 const getImageByName: NextApiHandler = (req, res) => {
@@ -43,22 +53,27 @@ export const config = {
 };
 
 const handleForm: NextApiHandler = (req, res) => {
-  const form = new formidable.IncomingForm();
-  return form.parse(req, parseForm.bind(null, res))
+  const form = new formidable.IncomingForm({
+    // multiples: true,
+    uploadDir: IMAGE_REPO,
+    // filter: function ({ mimetype }) {
+    //   return !!mimetype && !!mimetype.includes("image");
+    // }
+  });
+  return form.parse(req, parseForm)
 };
-type FormParser = (res: NextApiResponse, err: any, fields: Fields, files: Files) => void
+type FormParser = (err: any, fields: Fields, file: File) => void
 
-const parseForm: FormParser = (res, err, _fields, files) => {
-  if (err) return res.writeHead(500, "Problem parsing image").send("Problem parsing image")
-  return saveFile(files);
+const parseForm: FormParser = (err, _fields, { file }) => {
+  // if (err) return res.writeHead(500, "Problem parsing image").send("Problem parsing image")
+  return saveFile(file);
 }
-const saveFile = (files: Files) => {
-  if (Array.isArray(files)) {
-    return files.forEach((file: File) => {
-      const data = fs.readFileSync(file.path);
-      fs.writeFileSync(`./public/images/${file.name}`, data);
-      fs.unlinkSync(file.path);
-    })
-  }
+const saveFile = (file: File) => {
+  saveIt(file)
+}
 
-};
+const saveIt = (file: PersistentFile) => {
+  const data = fs.readFileSync(file.filepath);
+  fs.writeFileSync(`${IMAGE_REPO}/${file.originalFilename}`, data);
+  fs.unlinkSync(file.filepath);
+}

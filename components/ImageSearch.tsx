@@ -1,16 +1,19 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { PropsWithChildren } from "react";
-import { ImageOption, Image } from "../modules/gallery/domain/Image.entity"
+import { ChangeEventHandler, PropsWithChildren } from "react";
+import { Image } from "../modules/gallery/domain/Image.entity"
 interface ImageSearchProps {
-  images?: Array<ImageOption>
+  images: Array<Image>
+  handleFilter: ChangeEventHandler
 }
+
 
 export default function ImageSearch(props: PropsWithChildren<ImageSearchProps>) {
   return <Autocomplete
     disablePortal
     id="image-search"
-    options={props.images || [ImageOption.create(Image.create({ name: "empty", content: "none" }))]}
-    sx={{ width: 300 }}
+    options={props.images ? props.images.map(image => image.toView !== undefined ? image.toView() : Image.create(image).toView()) : []}
+    // onChange={props.handleFilter}
+    sx={{ width: 400 }}
     renderInput={(params) => <TextField {...params} label="Search for image" />}
   />
 }

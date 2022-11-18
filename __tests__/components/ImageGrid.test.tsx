@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import ImageGrid from '@/components/ImageGrid'
-import { ImageDisplay, Image } from "../../modules/gallery/domain/Image.entity";
-const anImage = ImageDisplay.create(Image.create({
+import { Image } from "../../modules/gallery/domain/Image.entity";
+const anImage = Image.create({
   name: "Cool image",
   id: "new id",
   content: "https://avatars.githubusercontent.com/u/1640588?v=4"
-}))
+})
 
 describe('ImageGrid', () => {
   it('Doesnt explode', () => {

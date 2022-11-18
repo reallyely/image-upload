@@ -3,7 +3,7 @@ interface IImage {
   content?: string
   id?: string
 }
-
+const IMAGE_PATH_WEB = "/images"
 export class Image implements IImage {
   name: string
   content: string
@@ -17,12 +17,14 @@ export class Image implements IImage {
   public static create(props: IImage) {
     return new Image(props)
   }
-
-  public toPersistence() {
+  public static fromFile(props: File) {
+    return new Image({ name: props.name, content: props.name, id: String(props.lastModified) })
   }
+
   public toDisplay() {
     return ImageDisplay.create(this)
   }
+
   public toView() {
     return ImageOption.create(this)
   }
@@ -51,7 +53,7 @@ export class ImageDisplay {
   private constructor(props: Image) {
     this.id = props.id
     this.label = props.name
-    this.src = props.content
+    this.src = `${IMAGE_PATH_WEB}/${props.content}`
   }
   public static create(props: Image) {
     return new ImageDisplay(props)
