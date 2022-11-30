@@ -1,2 +1,2 @@
-export * from "./Top"
-export * from "./Gallery"
+export * from "./Top";
+export * from "./Gallery";

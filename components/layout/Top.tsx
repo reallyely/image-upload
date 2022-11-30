@@ -1,17 +1,20 @@
-import Grid from "@mui/material/Grid";
 import { PropsWithChildren, ReactNode } from "react";
+
+import Grid from "@mui/material/Grid";
 
 interface HeaderProps {
   left?: ReactNode;
   right?: ReactNode;
 }
 export function Top(props: PropsWithChildren<HeaderProps>) {
-  return <Grid container rowSpacing={2}>
-    <Grid item container xs={8}>
-      {props.left}
+  return (
+    <Grid container rowSpacing={2}>
+      <Grid item container xs={8}>
+        {props.left}
+      </Grid>
+      <Grid item container justifyContent={"right"} xs={4}>
+        {props.right}
+      </Grid>
     </Grid>
-    <Grid item container justifyContent={"right"} xs={4}>
-      {props.right}
-    </Grid>
-  </Grid>
+  );
 }

@@ -1,6 +1,7 @@
+import { ChangeEventHandler, PropsWithChildren } from "react";
+
 import { Button } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
-import { ChangeEventHandler, PropsWithChildren } from "react";
 interface ImageUploadProps {
   handleUpload: ChangeEventHandler<HTMLInputElement>;
 }
