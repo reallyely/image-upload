@@ -11,12 +11,17 @@ import ImageComponent from "next/image";
 import { PropsWithChildren } from "react";
 
 interface ImageGridProps {
-  images?: Array<Image>;
+  allImages?: Array<Image>;
+  filteredImages?: Array<Image>;
 }
 interface ImageDisplayGridProps {
   imagesForDisplay: Array<ImageDisplay>;
+  allImages: Array<Image>;
 }
-export default function ImageGrid({ images }: ImageGridProps) {
+export default function ImageGrid({
+  allImages,
+  filteredImages,
+}: ImageGridProps) {
   return (
     <Stack
       spacing={5}
@@ -25,28 +30,41 @@ export default function ImageGrid({ images }: ImageGridProps) {
         height: "75vh",
       }}
     >
-      <CorrectImageGrid images={images} />
+      <CorrectImageGrid allImages={allImages} filteredImages={filteredImages} />
     </Stack>
   );
 }
-function CorrectImageGrid({ images }: ImageGridProps) {
-  if (Array.isArray(images) && images.length > 0) {
-    const imagesForDisplay = images.map((image) =>
+function CorrectImageGrid({ allImages, filteredImages }: ImageGridProps) {
+  if (
+    Array.isArray(filteredImages) &&
+    filteredImages.length > 0 &&
+    Array.isArray(allImages) &&
+    allImages.length > 0
+  ) {
+    const filteredImagesForDisplay = filteredImages.map((image) =>
       image.toDisplay !== undefined
         ? image.toDisplay()
         : Image.create(image).toDisplay()
     );
-    return <FilledImageGrid imagesForDisplay={imagesForDisplay} />;
+    return (
+      <FilledImageGrid
+        allImages={allImages}
+        imagesForDisplay={filteredImagesForDisplay}
+      />
+    );
   } else {
     return <EmptyImageGrid />;
   }
 }
 function FilledImageGrid({
+  allImages,
   imagesForDisplay,
 }: PropsWithChildren<ImageDisplayGridProps>) {
   return (
     <Stack>
-      <Typography>{imagesForDisplay.length} images</Typography>
+      <Typography>
+        {imagesForDisplay.length} images of {allImages?.length}
+      </Typography>
       <ImageList cols={4} variant="quilted">
         <Images images={imagesForDisplay} />
       </ImageList>

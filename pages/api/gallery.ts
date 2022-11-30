@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import formidable, { Fields, File } from "formidable";
+import formidable, { Fields, File, Files } from "formidable";
 
 import { Image } from "../../modules/gallery/domain/Image.entity";
 import fs from "fs";
@@ -55,22 +55,20 @@ export const config = {
 
 const handleForm: NextApiHandler = (req, res) => {
   const form = new formidable.IncomingForm({
-    // multiples: true,
+    multiples: true,
     uploadDir: IMAGE_REPO,
-    // filter: function ({ mimetype }) {
-    //   return !!mimetype && !!mimetype.includes("image");
-    // }
+    filter: function ({ mimetype }) {
+      return !!mimetype && !!mimetype.includes("image");
+    },
   });
   return form.parse(req, parseForm);
 };
-type FormParser = (err: any, fields: Fields, file: File) => void;
+type FormParser = (err: any, fields: Fields, files: Files) => void;
 
 const parseForm: FormParser = (err, _fields, { file }) => {
   // if (err) return res.writeHead(500, "Problem parsing image").send("Problem parsing image")
-  return saveFile(file);
-};
-const saveFile = (file: File) => {
-  saveIt(file);
+  // @ts-ignore
+  return Array.from(file).forEach(saveIt);
 };
 
 const saveIt = (file: File) => {

@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { Image } from "../../modules/gallery/domain/Image.entity";
 import ImageGrid from "@/components/ImageGrid";
+
 const anImage = Image.create({
   name: "Cool image",
   id: "new id",
@@ -18,12 +19,12 @@ describe("ImageGrid", () => {
     expect(screen.getByText("There's nothing here")).toBeVisible();
   });
   it("Renders a provided image", () => {
-    render(<ImageGrid images={[anImage]} />);
+    render(<ImageGrid allImages={[anImage]} />);
     expect(screen.getAllByRole("img").length).toBe(1);
   });
   it("Renders all images in the list", () => {
     const elevenImages = new Array(11).fill(anImage);
-    render(<ImageGrid images={elevenImages} />);
+    render(<ImageGrid allImages={elevenImages} />);
     expect(screen.getAllByRole("img").length).toBe(11);
   });
 });

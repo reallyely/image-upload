@@ -61,7 +61,7 @@ smooth some of this out, but abandoned halfway given the time restrictions.
 - ~~There's a mismatch in the values of the filter with the displayed image grid until refresh. The state isn't in sync with the file system~~
 - ~~`Error: Hydration failed because the initial UI does not match what was rendered on the server.` when no images are in the repo.~~
   - ~~This was a regression that I just don't have time to patch up. Given I'm new to Next, I figured I had a core misunderstanding of how to write something that would take some time to remedy~~
-- It's possible to upload non-image files which will cause some ugliness
+- ~~It's possible to upload non-image files which will cause some ugliness~~
 
 ## How to Use
 

@@ -46,9 +46,10 @@ export default function Home(props: PropsWithChildren<HomeData>) {
   };
   const handleUpload: UploadHandler = async (event) => {
     if (event.target.files && event.target.files[0]) {
-      const thisImage = event.target.files[0];
       const body = new FormData();
-      body.append("file", thisImage);
+      Array.from(event.target.files).forEach((file) =>
+        body.append("file", file)
+      );
       await fetch("/api/gallery", {
         method: "POST",
         body,
@@ -74,7 +75,12 @@ export default function Home(props: PropsWithChildren<HomeData>) {
           right={<ImageUpload handleUpload={handleUpload} />}
         ></Top>
       }
-      MainContent={<ImageGrid images={filteredImages}></ImageGrid>}
+      MainContent={
+        <ImageGrid
+          allImages={images}
+          filteredImages={filteredImages}
+        ></ImageGrid>
+      }
     />
   );
 }
