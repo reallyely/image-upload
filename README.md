@@ -22,13 +22,19 @@ A REST service which:
   - Can retrieve a single image by `name`
 - Use an opinionated framework to deliver more quickly and follow common paterns
 
+## Use Cases
+
+- (ONLY) Upload images and store them using an API
+- Search for images by name using an input box and the API
+- See all uploaded images
+
 ## Stephen's notes on the experience
 
 I needed to really timebox my effort on this project and to avoid the tempation to make it 'perfect'. I
 fell in those pitfalls several times when attempting to properly model the domain, starting to build out a fully separate backend,
 but at some point I came to my senses and realized I couldn't keep going that way.
 
-What's left is a product that meets the bottom line of what the prompt asked for, but with several known problems.
+What's left is a product that meets the bottom line of what the prompt asked for, but with several known problems and lacking polish.
 
 ### Overview of choices
 
@@ -61,11 +67,3 @@ From Node 16 `npm install`. Then `npm run dev` or `npm start`
 ```bash
 npm test
 ```
-## Use Cases
-
-- (ONLY) Upload images and store them using an API
-- Search for images by name using an input box and the API
-- List all uploaded images
-
-## General Architecture
-
