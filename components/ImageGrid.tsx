@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { Image, ImageDisplay } from "../modules/gallery/domain/Image.entity";
 import {
   ImageList,
@@ -65,7 +66,12 @@ function FilledImageGrid({
       <Typography>
         {imagesForDisplay.length} images of {allImages?.length}
       </Typography>
-      <ImageList cols={3} variant="quilted">
+      <ImageList
+        gap={10}
+        sx={{ overflow: "hidden" }}
+        cols={3}
+        variant="masonry"
+      >
         <Images images={imagesForDisplay} />
       </ImageList>
     </Stack>
@@ -98,15 +104,22 @@ interface ImagesProps {
 }
 const Images = (props: PropsWithChildren<ImagesProps>) => {
   return (
-    <>
+    <AnimatePresence>
       {props.images.map((image) => (
-        <ImageListItem key={image.id}>
-          <img src={image.src}></img>
-          <a target="_blank" href={image.src}>
-            <ImageListItemBar title={image.label}></ImageListItemBar>
-          </a>
-        </ImageListItem>
+        <motion.div
+          key={image.src}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <ImageListItem>
+            <img alt={image.label} src={image.src}></img>
+            <a target="_blank" href={image.src}>
+              <ImageListItemBar title={image.label}></ImageListItemBar>
+            </a>
+          </ImageListItem>
+        </motion.div>
       ))}
-    </>
+    </AnimatePresence>
   );
 };

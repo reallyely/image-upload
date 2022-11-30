@@ -5,6 +5,7 @@ import { Image } from "../../modules/gallery/domain/Image.entity";
 import fs from "fs";
 import path from "path";
 import process from "process";
+import sizeOf from "image-size";
 
 const IMAGE_PATH_LOCAL = "/public/images";
 const IMAGE_PATH_WEB = "/images";
@@ -31,10 +32,15 @@ const uploadImage: NextApiHandler = (req, res) => {
 
 const listImages: NextApiHandler = (req, res) => {
   const imagesFromRepo = fs.readdirSync(IMAGE_REPO);
-  const imagesForApp = imagesFromRepo.map((image) =>
-    Image.create({ name: image, content: image })
+  const imagesWithDimensions = imagesFromRepo.map((image) =>
+    Image.create({
+      ...sizeOf(path.join(IMAGE_REPO, image)),
+      name: image,
+      content: image,
+    })
   );
-  return res.status(200).send(imagesForApp);
+
+  return res.status(200).send(imagesWithDimensions);
 };
 
 const getImageByName: NextApiHandler = (req, res) => {

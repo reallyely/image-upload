@@ -19,12 +19,12 @@ describe("ImageGrid", () => {
     expect(screen.getByText("There's nothing here")).toBeVisible();
   });
   it("Renders a provided image", () => {
-    render(<ImageGrid allImages={[anImage]} />);
+    render(<ImageGrid filteredImages={[anImage]} />);
     expect(screen.getAllByRole("img").length).toBe(1);
   });
   it("Renders all images in the list", () => {
     const elevenImages = new Array(11).fill(anImage);
-    render(<ImageGrid allImages={elevenImages} />);
+    render(<ImageGrid filteredImages={elevenImages} />);
     expect(screen.getAllByRole("img").length).toBe(11);
   });
 });
