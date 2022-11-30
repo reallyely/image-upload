@@ -113,7 +113,6 @@ exports[`renders homepage unchanged 1`] = `
             <input
               accept="image/*"
               hidden=""
-              multiple=""
               type="file"
             />
             <span
@@ -131,16 +130,12 @@ exports[`renders homepage unchanged 1`] = `
         style="min-width: 100%; height: 100vh;"
       >
         <div
-          class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
+          class="css-1d9eljq-MuiStack-root"
         >
           <p
             class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
           >
-            <h3
-              align="center"
-            >
-              There's nothing here
-            </h3>
+            There's nothing here
           </p>
         </div>
       </div>

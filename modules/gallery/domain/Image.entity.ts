@@ -1,32 +1,40 @@
 interface IImage {
-  name?: string
-  content?: string
-  id?: string
+  name?: string;
+  content?: string;
+  id?: string;
 }
-const IMAGE_PATH_WEB = "/images"
+const IMAGE_PATH_WEB = "/images";
 export class Image implements IImage {
-  name: string
-  content: string
-  id: string
-  private constructor({ name = "", content = "", id = new Date().toISOString() }: IImage) {
-    this.name = name
-    this.content = content
-    this.id = id
+  name: string;
+  content: string;
+  id: string;
+  private constructor({
+    name = "",
+    content = "",
+    id = new Date().toISOString(),
+  }: IImage) {
+    this.name = name;
+    this.content = content;
+    this.id = id;
   }
 
   public static create(props: IImage) {
-    return new Image(props)
+    return new Image(props);
   }
   public static fromFile(props: File) {
-    return new Image({ name: props.name, content: props.name, id: String(props.lastModified) })
+    return new Image({
+      name: props.name,
+      content: props.name,
+      id: String(props.lastModified),
+    });
   }
 
   public toDisplay() {
-    return ImageDisplay.create(this)
+    return ImageDisplay.create(this);
   }
 
   public toView() {
-    return ImageOption.create(this)
+    return ImageOption.create(this);
   }
 }
 
@@ -36,14 +44,13 @@ export class ImageOption {
   label: string;
   value: string;
   private constructor(props: Image) {
-    this.id = props.id
-    this.label = props.name
-    this.value = props.name
+    this.id = props.id;
+    this.label = props.name;
+    this.value = props.name;
   }
   public static create(props: Image) {
-    return new ImageOption(props)
+    return new ImageOption(props);
   }
-
 }
 
 export class ImageDisplay {
@@ -51,11 +58,11 @@ export class ImageDisplay {
   src: string;
   label: string;
   private constructor(props: Image) {
-    this.id = props.id
-    this.label = props.name
-    this.src = `${IMAGE_PATH_WEB}/${props.content}`
+    this.id = props.id;
+    this.label = props.name;
+    this.src = `${IMAGE_PATH_WEB}/${props.content}`;
   }
   public static create(props: Image) {
-    return new ImageDisplay(props)
+    return new ImageDisplay(props);
   }
 }
