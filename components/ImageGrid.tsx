@@ -65,7 +65,7 @@ function FilledImageGrid({
       <Typography>
         {imagesForDisplay.length} images of {allImages?.length}
       </Typography>
-      <ImageList cols={4} variant="quilted">
+      <ImageList cols={3} variant="quilted">
         <Images images={imagesForDisplay} />
       </ImageList>
     </Stack>
@@ -102,7 +102,7 @@ const Images = (props: PropsWithChildren<ImagesProps>) => {
       {props.images.map((image) => (
         <ImageListItem key={image.id}>
           <img src={image.src}></img>
-          <a href={image.src}>
+          <a target="_blank" href={image.src}>
             <ImageListItemBar title={image.label}></ImageListItemBar>
           </a>
         </ImageListItem>

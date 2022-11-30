@@ -68,7 +68,8 @@ type FormParser = (err: any, fields: Fields, files: Files) => void;
 const parseForm: FormParser = (err, _fields, { file }) => {
   // if (err) return res.writeHead(500, "Problem parsing image").send("Problem parsing image")
   // @ts-ignore
-  return Array.from(file).forEach(saveIt);
+  if (Array.isArray(file)) return Array.from(file).forEach(saveIt);
+  return saveIt(file);
 };
 
 const saveIt = (file: File) => {
