@@ -64,6 +64,7 @@ function EmptyImageGrid() {
       sx={{ height: 1 }}
     >
       <ImageComponent
+        placeholder="empty"
         priority
         width="500"
         height="500"
@@ -83,7 +84,6 @@ const Images = (props: PropsWithChildren<ImagesProps>) => {
       {props.images.map((image) => (
         <ImageListItem key={image.id}>
           <img src={image.src}></img>
-
           <a href={image.src}>
             <ImageListItemBar title={image.label}></ImageListItemBar>
           </a>

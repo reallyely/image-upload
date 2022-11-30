@@ -17,6 +17,15 @@ const darkTheme = createTheme({
     body2: bodyFont.style,
     h2: headerFont.style,
   },
+  components: {
+    MuiImageListItemBar: {
+      styleOverrides: {
+        title: {
+          fontFamily: bodyFont.style.fontFamily,
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: "#733824",
