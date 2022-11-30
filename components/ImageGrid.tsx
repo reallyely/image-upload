@@ -1,13 +1,7 @@
-import {
-  Box,
-  Grid,
-  ImageList,
-  ImageListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
 import { Image, ImageDisplay } from "../modules/gallery/domain/Image.entity";
+import { ImageList, ImageListItem, Stack, Typography } from "@mui/material";
 
+import ImageComponent from "next/image";
 import { PropsWithChildren } from "react";
 
 interface ImageGridProps {
@@ -18,16 +12,15 @@ interface ImageDisplayGridProps {
 }
 export default function ImageGrid({ images }: ImageGridProps) {
   return (
-    <Grid
-      container
-      spacing={2}
+    <Stack
+      spacing={5}
       style={{
         minWidth: "100%",
-        height: "100vh",
+        height: "75vh",
       }}
     >
       <CorrectImageGrid images={images} />
-    </Grid>
+    </Stack>
   );
 }
 function CorrectImageGrid({ images }: ImageGridProps) {
@@ -57,11 +50,20 @@ function FilledImageGrid({
 function EmptyImageGrid() {
   return (
     <Stack
+      spacing={2}
       direction="column"
       justifyContent="center"
-      alignItems="flex-end"
+      alignItems="center"
       maxWidth="lg"
+      sx={{ height: 1 }}
     >
+      <ImageComponent
+        priority
+        width="500"
+        height="500"
+        alt="A red cedar stands alone in an empty landscape"
+        src="/empty-red-cedar.png"
+      ></ImageComponent>
       <Typography variant="h2">There's nothing here</Typography>
     </Stack>
   );

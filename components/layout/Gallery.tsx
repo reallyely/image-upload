@@ -1,13 +1,15 @@
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 export function Gallery(props: any) {
   return (
-    <Grid container spacing={2}>
-      <Grid container item>
-        {props.TopContent}
-      </Grid>
-      <Grid container item>
-        {props.MainContent}
-      </Grid>
-    </Grid>
+    <Stack
+      sx={{ width: 1 }}
+      justifyContent="center"
+      alignItems="center"
+      spacing={2}
+      direction="column"
+    >
+      <Stack sx={{ width: 1 }}>{props.TopContent}</Stack>
+      <Stack sx={{ width: 1 }}>{props.MainContent}</Stack>
+    </Stack>
   );
 }

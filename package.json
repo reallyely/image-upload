@@ -13,12 +13,13 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.14",
+    "@next/font": "^13.0.5",
     "formidable": "^2.0.1",
     "next": "latest",
     "node-mocks-http": "^1.12.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "types-ddd": "^3.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",

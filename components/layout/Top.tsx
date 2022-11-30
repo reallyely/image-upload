@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from "react";
 
-import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 interface HeaderProps {
   left?: ReactNode;
@@ -8,13 +9,16 @@ interface HeaderProps {
 }
 export function Top(props: PropsWithChildren<HeaderProps>) {
   return (
-    <Grid container rowSpacing={2}>
-      <Grid item container xs={8}>
-        {props.left}
-      </Grid>
-      <Grid item container justifyContent={"right"} xs={4}>
+    <Stack
+      sx={{ width: 1 }}
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Box>{props.left}</Box>
+      <Box alignItems="center" justifyContent="flex-end">
         {props.right}
-      </Grid>
-    </Grid>
+      </Box>
+    </Stack>
   );
 }
