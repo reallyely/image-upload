@@ -1,15 +1,16 @@
 import { Gallery, Top } from "@/components/layout";
 import { Image, ImageOption } from "../modules/gallery/domain/Image.entity";
+import ImageSearch, {
+  onChangeHandler as imageSearchOnChangeHandler,
+} from "@/components/ImageSearch";
 import React, {
   ChangeEventHandler,
   PropsWithChildren,
-  SyntheticEvent,
   useEffect,
   useState,
 } from "react";
 
 import ImageGrid from "@/components/ImageGrid";
-import ImageSearch from "@/components/ImageSearch";
 import ImageUpload from "@/components/ImageUpload";
 
 interface HomeData {}
@@ -17,6 +18,7 @@ type UploadHandler = ChangeEventHandler<HTMLInputElement>;
 export default function Home(props: PropsWithChildren<HomeData>) {
   const [images, setImages] = useState<Image[]>([]);
   const [filteredImages, setFilteredImages] = useState(images);
+  const [filterValues, setFilterValues] = useState<ImageOption[]>([]);
   const getImages = async () =>
     await fetch("/api/gallery", {
       method: "GET",
@@ -31,16 +33,15 @@ export default function Home(props: PropsWithChildren<HomeData>) {
       setFilteredImages(images);
     });
   }, []);
-  const handleFilter = async (
-    _event: SyntheticEvent,
-    values: Array<ImageOption>
-  ) => {
+  const handleFilter: imageSearchOnChangeHandler = async (_event, values) => {
     if (values.length > 0) {
       const things = images.filter((image) => {
         return values.some(({ label }) => image.name.includes(label));
       });
+      setFilterValues(values);
       return setFilteredImages(things);
     }
+    setFilterValues([]);
     setFilteredImages(images);
   };
   const handleUpload: UploadHandler = async (event) => {
@@ -55,6 +56,7 @@ export default function Home(props: PropsWithChildren<HomeData>) {
       const imagesFromFs = await getImages();
       setImages(imagesFromFs);
       setFilteredImages(imagesFromFs);
+      setFilterValues([]);
     }
   };
 
@@ -64,6 +66,7 @@ export default function Home(props: PropsWithChildren<HomeData>) {
         <Top
           left={
             <ImageSearch
+              values={filterValues}
               handleFilter={handleFilter}
               images={images.map((i) => i?.toImageOption())}
             />

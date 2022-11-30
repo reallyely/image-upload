@@ -7,7 +7,8 @@ import {
 
 import { ImageOption } from "../modules/gallery/domain/Image.entity";
 import { PropsWithChildren } from "react";
-type onChangeHandler = (
+
+export type onChangeHandler = (
   event: React.SyntheticEvent,
   value: ImageOption[],
   reason?: AutocompleteChangeReason,
@@ -16,6 +17,7 @@ type onChangeHandler = (
 interface ImageSearchProps {
   images: Array<ImageOption>;
   handleFilter: onChangeHandler;
+  values?: Array<ImageOption>;
 }
 
 export default function ImageSearch(
@@ -30,6 +32,7 @@ export default function ImageSearch(
       disablePortal
       id="image-search"
       multiple={true}
+      value={props?.values}
       options={imageOptions}
       onChange={props.handleFilter}
       isOptionEqualToValue={isOptionEqualToValue}
