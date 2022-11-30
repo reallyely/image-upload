@@ -33,7 +33,7 @@ export class Image implements IImage {
     return ImageDisplay.create(this);
   }
 
-  public toView() {
+  public toImageOption() {
     return ImageOption.create(this);
   }
 }

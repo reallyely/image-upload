@@ -1,24 +1,40 @@
 import { Gallery, Top } from "@/components/layout";
 import { Image, ImageOption } from "../modules/gallery/domain/Image.entity";
-import React, { ChangeEventHandler, PropsWithChildren, useState } from "react";
+import React, {
+  ChangeEventHandler,
+  PropsWithChildren,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
 
 import ImageGrid from "@/components/ImageGrid";
 import ImageSearch from "@/components/ImageSearch";
 import ImageUpload from "@/components/ImageUpload";
-import { getImages } from "modules/gallery/infrastructure/getImages";
 
-interface HomeData {
-  images: Array<Image>;
-}
+interface HomeData {}
 type UploadHandler = ChangeEventHandler<HTMLInputElement>;
 export default function Home(props: PropsWithChildren<HomeData>) {
-  const initialImages = JSON.parse(props.images).map((i: Image) =>
-    Image.create(i)
-  );
-  const [images, setImages] = useState(initialImages);
+  const [images, setImages] = useState<Image[]>([]);
   const [filteredImages, setFilteredImages] = useState(images);
+  const getImages = async () =>
+    await fetch("/api/gallery", {
+      method: "GET",
+    }).then(async (a) => {
+      const jsn = await a.json();
+      return jsn.map(Image.create);
+    });
 
-  const handleFilter = async (event, values: Array<ImageOption>) => {
+  useEffect(() => {
+    getImages().then((images) => {
+      setImages(images);
+      setFilteredImages(images);
+    });
+  }, []);
+  const handleFilter = async (
+    _event: SyntheticEvent,
+    values: Array<ImageOption>
+  ) => {
     if (values.length > 0) {
       const things = images.filter((image) => {
         return values.some(({ label }) => image.name.includes(label));
@@ -36,12 +52,7 @@ export default function Home(props: PropsWithChildren<HomeData>) {
         method: "POST",
         body,
       });
-      const imagesFromFs = await fetch("/api/gallery", {
-        method: "GET",
-      }).then(async (a) => {
-        const jsn = await a.json();
-        return jsn.map(Image.create);
-      });
+      const imagesFromFs = await getImages();
       setImages(imagesFromFs);
       setFilteredImages(imagesFromFs);
     }
@@ -51,19 +62,16 @@ export default function Home(props: PropsWithChildren<HomeData>) {
     <Gallery
       TopContent={
         <Top
-          left={<ImageSearch handleFilter={handleFilter} images={images} />}
+          left={
+            <ImageSearch
+              handleFilter={handleFilter}
+              images={images.map((i) => i?.toImageOption())}
+            />
+          }
           right={<ImageUpload handleUpload={handleUpload} />}
         ></Top>
       }
       MainContent={<ImageGrid images={filteredImages}></ImageGrid>}
     />
   );
-}
-export async function getServerSideProps() {
-  const images = getImages();
-  if (images.length === 0) {
-    return { props: { images: [] } };
-  } else {
-    return { props: { images: JSON.stringify(images) } };
-  }
 }

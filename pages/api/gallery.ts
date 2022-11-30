@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import formidable, { Fields, File, Files } from "formidable";
+import formidable, { Fields, File } from "formidable";
 
 import { Image } from "../../modules/gallery/domain/Image.entity";
 import PersistentFile from "formidable/PersistentFile";
@@ -75,7 +75,7 @@ const saveFile = (file: File) => {
   saveIt(file);
 };
 
-const saveIt = (file: PersistentFile) => {
+const saveIt = (file: File) => {
   const data = fs.readFileSync(file.filepath);
   fs.writeFileSync(`${IMAGE_REPO}/${file.originalFilename}`, data);
   fs.unlinkSync(file.filepath);
