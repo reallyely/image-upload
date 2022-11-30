@@ -2,11 +2,9 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import formidable, { Fields, File } from "formidable";
 
 import { Image } from "../../modules/gallery/domain/Image.entity";
-import PersistentFile from "formidable/PersistentFile";
 import fs from "fs";
 import path from "path";
 import process from "process";
-import { randomUUID } from "crypto";
 
 const IMAGE_PATH_LOCAL = "/public/images";
 const IMAGE_PATH_WEB = "/images";
@@ -34,7 +32,7 @@ const uploadImage: NextApiHandler = (req, res) => {
 const listImages: NextApiHandler = (req, res) => {
   const imagesFromRepo = fs.readdirSync(IMAGE_REPO);
   const imagesForApp = imagesFromRepo.map((image) =>
-    Image.create({ id: randomUUID(), name: image, content: image })
+    Image.create({ name: image, content: image })
   );
   return res.status(200).send(imagesForApp);
 };

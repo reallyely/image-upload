@@ -7,7 +7,7 @@ A single page application for interacting with image contributing workflows.
 A user can
 
 - view a gallery of images
-  - ~~show a placeholder for an empty gallery~~
+  - show a placeholder for an empty gallery
   - Show the total number of images
 - upload an image
   - with name
@@ -49,10 +49,10 @@ smooth some of this out, but abandoned halfway given the time restrictions.
 ### Compromises
 
 - Use the app's folder structure directly instead of a separate service
-  - This is insecure and bad for performance
-- Do no custom styling on UI
-  - I focused on function over form and accepted Just Good Enough
-- Not all types are fully fleshed out, and red squiggles abound
+  - This is insecure and bad for performance at scale
+- ~~Do no custom styling on UI~~
+  - ~~I focused on function over form and accepted Just Good Enough~~
+- ~~Not all types are fully fleshed out, and red squiggles abound~~
 - I wanted to ensure I showed _some_ testing, but it wasn't as much as I'd have liked. I wanted to show some E2E Testing with Playwright
 
 ### Bugs:

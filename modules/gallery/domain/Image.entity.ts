@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 interface IImage {
   name?: string;
   content?: string;
@@ -8,11 +10,7 @@ export class Image implements IImage {
   name: string;
   content: string;
   id: string;
-  private constructor({
-    name = "",
-    content = "",
-    id = new Date().toISOString(),
-  }: IImage) {
+  private constructor({ name = "", content = "", id = randomUUID() }: IImage) {
     this.name = name;
     this.content = content;
     this.id = id;
@@ -25,7 +23,6 @@ export class Image implements IImage {
     return new Image({
       name: props.name,
       content: props.name,
-      id: String(props.lastModified),
     });
   }
 
