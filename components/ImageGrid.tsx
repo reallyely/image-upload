@@ -1,5 +1,11 @@
 import { Image, ImageDisplay } from "../modules/gallery/domain/Image.entity";
-import { ImageList, ImageListItem, Stack, Typography } from "@mui/material";
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 import ImageComponent from "next/image";
 import { PropsWithChildren } from "react";
@@ -41,7 +47,7 @@ function FilledImageGrid({
   return (
     <Stack>
       <Typography>{imagesForDisplay.length} images</Typography>
-      <ImageList variant="quilted">
+      <ImageList cols={4} variant="quilted">
         <Images images={imagesForDisplay} />
       </ImageList>
     </Stack>
@@ -77,6 +83,10 @@ const Images = (props: PropsWithChildren<ImagesProps>) => {
       {props.images.map((image) => (
         <ImageListItem key={image.id}>
           <img src={image.src}></img>
+
+          <a href={image.src}>
+            <ImageListItemBar title={image.label}></ImageListItemBar>
+          </a>
         </ImageListItem>
       ))}
     </>
